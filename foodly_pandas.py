@@ -8,25 +8,25 @@ df = pd.DataFrame(columns=mCols)
 
 # space deleteing function
 def re_palce(tag):
-    pattern = re.compile(r'\s+')
+    pattern  = re.compile(r'\s+')
     sentence = re.sub(pattern, ' ', tag)
     return sentence
 
 # set empty list waiting for appending
-descs = []
-prices = []
-titles = []
-small_imgs = []
-big_imgs = []
-harvest_year = []
-is_in_stock = []
-measures = []
-vitamins = []
-minerals = []
-energys = []
+descs          = []
+prices         = []
+titles         = []
+small_imgs     = []
+big_imgs       = []
+harvest_year   = []
+is_in_stock    = []
+measures       = []
+vitamins       = []
+minerals       = []
+energys        = []
 carbonhydrates = []
-fats = []
-proteins = []
+fats           = []
+proteins       = []
 
 # access from first page to last page
 last_page = 6
@@ -71,8 +71,8 @@ for i in range(1,last_page):
         html = requests.get(i).text
         soup = BeautifulSoup(html, 'html.parser')
         
-        desc = soup.select('div.product__desc')
-        price = soup.select('span.js-price-and-value > span.money')
+        desc   = soup.select('div.product__desc')
+        price  = soup.select('span.js-price-and-value > span.money')
         sense2 = re_palce(desc[0].text)
         descs.append(sense2)
         prices.append(price[0].text)
@@ -137,20 +137,20 @@ for i in range(1,last_page):
             minerals.append(mineral)
 
 # put values in each list to created column to data frame
-df['titles'] = titles
-df['prices'] = prices
-df['descs'] = descs
-df['small_imgs'] = small_imgs
-df['big_imgs'] = big_imgs
-df['energys'] = energys
+df['titles']         = titles
+df['prices']         = prices
+df['descs']          = descs
+df['small_imgs']     = small_imgs
+df['big_imgs']       = big_imgs
+df['energys']        = energys
 df['carbonhydrates'] = carbonhydrates
-df['proteins'] = proteins
-df['fats'] = fats
-df['minerals'] = minerals
-df['vitamins'] = vitamins
-df['is_in_stock'] = is_in_stock
-df['harvest_year'] = harvest_year
-df['measures'] = measures
+df['proteins']       = proteins
+df['fats']           = fats
+df['minerals']       = minerals
+df['vitamins']       = vitamins
+df['is_in_stock']    = is_in_stock
+df['harvest_year']   = harvest_year
+df['measures']       = measures
 
 # change data frame to .csv file
 df.to_csv("./realfinal.csv", encoding='utf8')
